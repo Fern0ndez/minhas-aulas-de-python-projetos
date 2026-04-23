@@ -1,0 +1,86 @@
+# Gerenciador de tarefas simples usando dicionário
+
+tarefas = {}
+contador_id = 1
+
+
+def adicionar_tarefa():
+    global contador_id
+
+    titulo = input("Digite o título da tarefa: ")
+    descricao = input("Digite a descrição: ")
+
+    tarefas[contador_id] = {
+        "titulo": titulo,
+        "descricao": descricao,
+        "concluida": False
+    }
+
+    print(f"Tarefa adicionada com ID {contador_id}!\n")
+    contador_id += 1
+
+
+def listar_tarefas():
+    if not tarefas:
+        print("Nenhuma tarefa cadastrada.\n")
+        return
+
+    for id_tarefa, dados in tarefas.items():
+        status = "✔" if dados["concluida"] else "x"
+        print(f"[{id_tarefa}] {dados['titulo']} - {status}")
+        print(f"    {dados['descricao']}")
+    print()
+
+
+def concluir_tarefa():
+    try:
+        id_tarefa = int(input("Digite o ID da tarefa para concluir: "))
+        if id_tarefa in tarefas:
+            tarefas[id_tarefa]["concluida"] = True
+            print("Tarefa concluída!\n")
+        else:
+            print("ID não encontrado.\n")
+    except ValueError:
+        print("Digite um número válido.\n")
+
+
+def remover_tarefa():
+    try:
+        id_tarefa = int(input("Digite o ID da tarefa para remover: "))
+        if id_tarefa in tarefas:
+            del tarefas[id_tarefa]
+            print("Tarefa removida!\n")
+        else:
+            print("ID não encontrado.\n")
+    except ValueError:
+        print("Digite um número válido.\n")
+
+
+def menu():
+    while True:
+        print("=== GERENCIADOR DE TAREFAS ===")
+        print("1 - Adicionar tarefa")
+        print("2 - Listar tarefas")
+        print("3 - Concluir tarefa")
+        print("4 - Remover tarefa")
+        print("0 - Sair")
+
+        opcao = input("Escolha uma opção: ")
+
+        if opcao == "1":
+            adicionar_tarefa()
+        elif opcao == "2":
+            listar_tarefas()
+        elif opcao == "3":
+            concluir_tarefa()
+        elif opcao == "4":
+            remover_tarefa()
+        elif opcao == "0":
+            print("Saindo...")
+            break
+        else:
+            print("Opção inválida.\n")
+
+
+if __name__ == "__main__":
+    menu()

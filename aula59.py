@@ -1,0 +1,16 @@
+def Print(a, b, c):
+    print('sexo1')
+    print('sexo2')
+    print('sexo3')
+    print('sexo4')
+    print('sexo5')
+
+Print()
+Print()
+Print()
+Print()
+Print()
+Print()
+Print()
+Print()
+Print()
